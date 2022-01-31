@@ -7,7 +7,7 @@ app = FastAPI()
 
 @app.get("/")
 def read_root():
-    return {"Welcome to the Pokedex API!"}
+    return("Welcome to the Pokedex API!")
 
 @app.get("/api/pokedex/")
 def pokedex_all():
