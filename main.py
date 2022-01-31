@@ -1,4 +1,4 @@
-from plistlib import load
+from typing import Optional
 from fastapi import FastAPI
 import json
 
