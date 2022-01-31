@@ -1,15 +1,13 @@
 from plistlib import load
-import re
-from typing import Optional
 from fastapi import FastAPI
 import json
 
 app = FastAPI()
 
 
-@app.get("/api")
+@app.get("/")
 def read_root():
-    return("Welcome to the Pokedex API!")
+    return {"Hello": "World"}
 
 @app.get("/api/pokedex/")
 def pokedex_all():
@@ -46,6 +44,14 @@ async def pokedex(
     else:
         response = data["pokedex"][json_number]
     return response
+
+@app.get("/api/pokedex/{id}")
+def pokedex(id:int):
+    id -= 1
+    print(id)
+    with open('./pokedex/pokedex.json', 'rb') as f:
+        data = json.load(f)
+    return data["pokedex"][id]
 
 # @app.get("/items/{item_id}")
 # def read_item(item_id: int, q: str = None):
