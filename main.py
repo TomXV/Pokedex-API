@@ -12,7 +12,7 @@ def read_root():
     return("Welcome to the Pokedex API!")
 
 @app.get("/api/pokedex/")
-def pokedex():
+def pokedex_all():
     with open('./pokedex/pokedex.json', 'rb') as f:
         data = json.load(f)
     return data["pokedex"]
@@ -35,19 +35,14 @@ async def pokedex(
 
     if id is True:
         response = data["pokedex"][json_number]["id"]
-
-    if name is True:
+    elif name is True:
         response = data["pokedex"][json_number]["name"]
-
-    if classification is True:
+    elif classification is True:
         response = data["pokedex"][json_number]["classification"]
-
-    if height is True:
+    elif height is True:
         response = data["pokedex"][json_number]["height"]
-
-    if weight is True:
+    elif weight is True:
         response = data["pokedex"][json_number]["weight"]
-
     else:
         response = data["pokedex"][json_number]
     return response
