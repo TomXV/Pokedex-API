@@ -26,4 +26,4 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Run uvicorn
       run: |
-        uvicorn main:app
+      python main.py
