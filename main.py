@@ -22,7 +22,20 @@ async def pokedex(
     name :Optional[bool] = None,
     classification :Optional[bool] = None,
     height :Optional[bool] = None,
-    weight :Optional[float] = None
+    weight :Optional[bool] = None,
+    type :Optional[int] = None,
+    mega_evolution :Optional[bool] = None,
+    mega_evo :Optional[bool] = None,
+    mega_evolution_name :Optional[bool] = None,
+    mega_evolution_height :Optional[bool] = None,
+    mega_evolution_weight :Optional[bool] = None,
+    mega_evo_name :Optional[bool] = None,
+    mega_evo_height :Optional[bool] = None,
+    mega_evo_weight :Optional[bool] = None,
+    gigantamax :Optional[bool] = None,
+    gigantamax_name :Optional[bool] = None,
+    gigantamax_height :Optional[bool] = None,
+    gigantamax_weight :Optional[bool] = None
     ):
 
     json_number -= 1
@@ -31,18 +44,40 @@ async def pokedex(
     with open('./pokedex/pokedex.json', 'rb') as f:
         data = json.load(f)
 
-    if id is True:
-        response = data["pokedex"][json_number]["id"]
-    elif name is True:
-        response = data["pokedex"][json_number]["name"]
-    elif classification is True:
-        response = data["pokedex"][json_number]["classification"]
-    elif height is True:
-        response = data["pokedex"][json_number]["height"]
-    elif weight is True:
-        response = data["pokedex"][json_number]["weight"]
-    else:
-        response = data["pokedex"][json_number]
+    try:
+        if id is True:
+            response = data["pokedex"][json_number]["id"]
+        elif name is True:
+            response = data["pokedex"][json_number]["name"]
+        elif classification is True:
+            response = data["pokedex"][json_number]["classification"]
+        elif height is True:
+            response = data["pokedex"][json_number]["height"]
+        elif weight is True:
+            response = data["pokedex"][json_number]["weight"]
+        elif mega_evolution is True or mega_evo is True:
+            response = data["pokedex"][json_number]["mega_evolution"][type]
+        elif mega_evolution_name is True or mega_evo_name is True:
+            response = data["pokedex"][json_number]["mega_evolution"][type]["name"]
+        elif mega_evolution_height is True or mega_evo_height is True:
+            response = data["pokedex"][json_number]["mega_evolution"][type]["height"]
+        elif mega_evolution_weight is True or mega_evo_weight is True:
+            response = data["pokedex"][json_number]["mega_evolution"][type]["weight"]
+        elif gigantamax is True:
+            response = data["pokedex"][json_number]["gigantamax"][0]
+        elif gigantamax_name is True:
+            response = data["pokedex"][json_number]["gigantamax"][0]["name"]
+        elif gigantamax_height is True:
+            response = data["pokedex"][json_number]["gigantamax"][0]["height"]
+        elif gigantamax_weight is True:
+            response = data["pokedex"][json_number]["mega_evolution"][0]["weight"]
+        else:
+            response = data["pokedex"][json_number]
+    except KeyError:
+        response = "KeyError: Key is Not Found."
+    except IndexError:
+        response = "IndexError: Index is Not Found."
+
     return response
 
 # @app.get("/items/{item_id}")
