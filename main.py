@@ -39,26 +39,29 @@ async def pokedex(
     with open('./pokedex/pokedex.json', 'rb') as f:
         data = json.load(f)
 
-    if id is True:
-        response = data["pokedex"][json_number]["id"]
-    elif name is True:
-        response = data["pokedex"][json_number]["name"]
-    elif classification is True:
-        response = data["pokedex"][json_number]["classification"]
-    elif height is True:
-        response = data["pokedex"][json_number]["height"]
-    elif weight is True:
-        response = data["pokedex"][json_number]["weight"]
-    elif mega_evolution is True or mega_evo is True:
-        response = data["pokedex"][json_number]["mega_evolution"][0]
-    elif mega_evolution_name is True or mega_evo_name is True:
-            response = data["pokedex"][json_number]["mega_evolution"][0]["name"]
-    elif mega_evolution_height is True or mega_evo_height is True:
-            response = data["pokedex"][json_number]["mega_evolution"][0]["height"]
-    elif mega_evolution_weight is True or mega_evo_weight is True:
-            response = data["pokedex"][json_number]["mega_evolution"][0]["weight"]
-    else:
-        response = data["pokedex"][json_number]
+    try:
+        if id is True:
+            response = data["pokedex"][json_number]["id"]
+        elif name is True:
+            response = data["pokedex"][json_number]["name"]
+        elif classification is True:
+            response = data["pokedex"][json_number]["classification"]
+        elif height is True:
+            response = data["pokedex"][json_number]["height"]
+        elif weight is True:
+            response = data["pokedex"][json_number]["weight"]
+        elif mega_evolution is True or mega_evo is True:
+            response = data["pokedex"][json_number]["mega_evolution"][0]
+        elif mega_evolution_name is True or mega_evo_name is True:
+                response = data["pokedex"][json_number]["mega_evolution"][0]["name"]
+        elif mega_evolution_height is True or mega_evo_height is True:
+                response = data["pokedex"][json_number]["mega_evolution"][0]["height"]
+        elif mega_evolution_weight is True or mega_evo_weight is True:
+                response = data["pokedex"][json_number]["mega_evolution"][0]["weight"]
+        else:
+            response = data["pokedex"][json_number]
+    except KeyError:
+        response = "KeyError: Key is Not Found."
 
     return response
 
