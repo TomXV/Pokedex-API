@@ -22,7 +22,7 @@ async def pokedex(
     name :Optional[bool] = None,
     classification :Optional[bool] = None,
     height :Optional[bool] = None,
-    weight :Optional[float] = None
+    weight :Optional[bool] = None
     ):
 
     json_number -= 1
