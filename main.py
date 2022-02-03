@@ -24,6 +24,7 @@ async def pokedex(
     height :Optional[bool] = None,
     weight :Optional[bool] = None,
     mega_evolution :Optional[bool] = None,
+    mega_evo :Optional[bool] = None,
     mega_evolution_name :Optional[bool] = None,
     mega_evolution_height :Optional[bool] = None,
     mega_evolution_weight :Optional[bool] = None,
@@ -48,10 +49,7 @@ async def pokedex(
         response = data["pokedex"][json_number]["height"]
     elif weight is True:
         response = data["pokedex"][json_number]["weight"]
-    else:
-        response = "Not Found."
-
-    if mega_evolution is True:
+    elif mega_evolution is True or mega_evo is True:
         response = data["pokedex"][json_number]["mega_evolution"][0]
     elif mega_evolution_name is True or mega_evo_name is True:
             response = data["pokedex"][json_number]["mega_evolution"][0]["name"]
@@ -60,7 +58,7 @@ async def pokedex(
     elif mega_evolution_weight is True or mega_evo_weight is True:
             response = data["pokedex"][json_number]["mega_evolution"][0]["weight"]
     else:
-        response = "Not Found."
+        response = data["pokedex"][json_number]
 
     return response
 
