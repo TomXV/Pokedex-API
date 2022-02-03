@@ -22,7 +22,11 @@ async def pokedex(
     name :Optional[bool] = None,
     classification :Optional[bool] = None,
     height :Optional[bool] = None,
-    weight :Optional[bool] = None
+    weight :Optional[bool] = None,
+    mega_evolution :Optional[bool] = None,
+    mega_evolution_name :Optional[bool] = None,
+    mega_evolution_height :Optional[bool] = None,
+    mega_evolution_weight :Optional[bool] = None
     ):
 
     json_number -= 1
@@ -43,6 +47,17 @@ async def pokedex(
         response = data["pokedex"][json_number]["weight"]
     else:
         response = data["pokedex"][json_number]
+
+    if mega_evolution is True:
+        response = data["pokedex"][json_number]["mega_evolution"][0]
+    elif mega_evolution_name is True:
+            response = data["pokedex"][json_number]["mega_evolution"][0]["name"]
+    elif mega_evolution_height is True:
+            response = data["pokedex"][json_number]["mega_evolution"][0]["height"]
+    elif mega_evolution_weight is True:
+            response = data["pokedex"][json_number]["mega_evolution"][0]["weight"]
+    else:
+        response
     return response
 
 # @app.get("/items/{item_id}")
